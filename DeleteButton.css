@@ -9,10 +9,9 @@ button {
   font-spacing: -2px;
   
   line-height: 110px;
-  
   border: 3px solid gray;
   outline: 3px solid white;
-  background-image: linear-gradient(to right, rgb(245, 175, 98, 0.95),   rgb(239, 149, 68, 1));
+  background-image: linear-gradient(to right, rgb(245, 175, 98, 0.95), rgb(239, 149, 68, 1));
 }
 
 i {

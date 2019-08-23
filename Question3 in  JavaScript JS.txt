@@ -1,0 +1,132 @@
+let searchHistory = [];
+
+function getListFromApi() 
+{
+    if(event.target.value === null || event.target.value.length === 0)
+      return;
+
+    var userInput = document.getElementById("searchInput").value;
+    var dataListFromApi = document.getElementById('itemsDatalist');
+  
+    var request = new XMLHttpRequest();
+    if(userInput.length == 0) {
+      request.open('GET', 'https://restcountries.eu/rest/v2/all', true);
+    }
+    else if(userInput.length > 0) {
+      request.open('GET', 'https://restcountries.eu/rest/v2/name/' + userInput, true);
+    }
+  
+    request.onload = function() {
+      var data = JSON.parse(this.response);
+      
+      if (request.status < 200 || request.status >= 400) {
+        console.log('Error - connection to the API is not working - check the URL');
+        return;
+      }
+    
+      // Clear previous list from api
+      document.getElementById('itemsDatalist').innerHTML = "";
+      
+      // Fill list with new items from api
+      data.forEach(item => {
+          var option = document.createElement('option');
+          option.value = item.name;
+          dataListFromApi.appendChild(option);
+      })
+    }
+    request.send();
+}
+
+function searchSelected() {
+  if(event.target.value === null || event.target.value.length === 0)
+    return;
+  
+  var dataListFromApi = document.getElementById('itemsDatalist');
+  for (i = 0; i < dataListFromApi.options.length; i++) {
+    if(dataListFromApi.options[i].value === event.target.value){
+        var item = {
+        search: event.target.value, 
+        dateTime: new Date().toLocaleString()
+        };
+    
+        searchHistory.push(item);
+        createTable();
+        event.target.value = "";
+    }
+  }
+}
+
+function deleteRow(rowIndex) {
+  searchHistory.splice(rowIndex, 1);
+  createTable();
+}
+
+function deleteAllRows() {
+  searchHistory = []; 
+  createTable();
+}
+
+function createTable() {
+  var tbl = document.getElementById("searchHistory");
+  tbl.className = "table";
+  tbl.innerHTML = "";
+  
+  if(searchHistory.length == 0)
+    return;
+
+  var body = document.getElementsByTagName("body")[0];
+  var tblBody = document.createElement("tbody");
+  
+  var trHeader = document.createElement("tr");
+  
+  var thSearchHistory = document.createElement("th");
+  var searchHistoryText = document.createTextNode("Search History");
+  thSearchHistory.className = "headerSearch";
+  thSearchHistory.appendChild(searchHistoryText);
+  trHeader.appendChild(thSearchHistory);
+  
+  var thEmpty = document.createElement("th");
+  trHeader.appendChild(thEmpty);
+  
+  var thClearAll = document.createElement("th");
+  var buttonClearAll = document.createElement('button');
+  var clearAllText = document.createTextNode("Clear All");
+  buttonClearAll.className = "btn";
+  buttonClearAll.setAttribute('onclick', 'deleteAllRows()');
+  buttonClearAll.appendChild(clearAllText);
+  thClearAll.appendChild(buttonClearAll);
+  trHeader.appendChild(thClearAll);
+  
+  tblBody.appendChild(trHeader);
+
+  for (var i = 0; i < searchHistory.length; i++) 
+  {
+    var tr = document.createElement("tr");
+    tr.className = "tr";
+    
+    var tdSearch = document.createElement("td");
+    tdSearch.className = "td";
+    var searchText = document.createTextNode(searchHistory[i].search);
+    tdSearch.appendChild(searchText);
+    tr.appendChild(tdSearch);
+    
+    var tdDateTime = document.createElement("td");
+    tdDateTime.className = "datetimeCell";
+    var dateTimeText = document.createTextNode(searchHistory[i].dateTime);
+    tdDateTime.appendChild(dateTimeText);
+    tr.appendChild(tdDateTime);
+    
+    var tdButton = document.createElement("td");
+    var button = document.createElement('button');
+    button.className = "btn";
+    button.innerHTML = "x";
+    button.setAttribute('onclick', 'deleteRow(this.parentNode.parentNode.rowIndex-1)');
+    tdButton.appendChild(button);
+    tr.appendChild(tdButton);
+    
+    tblBody.appendChild(tr);
+  }
+
+  tbl.appendChild(tblBody);
+  body.appendChild(tbl);
+}

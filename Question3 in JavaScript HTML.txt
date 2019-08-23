@@ -1,0 +1,21 @@
+<script src="path/to/vanilla.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<html>
+  <head>
+    <title>
+      A Simple Search Application
+    </title>
+  </head>
+  
+  <body class="center">
+    <h1>A Simple Search</h1>
+    <form autocomplete="nope"> 
+      <input type="search" list="itemsDatalist" id="searchInput"
+           onkeyup="getListFromApi()" onchange="searchSelected()"" autocomplete="nope">
+      <datalist id="itemsDatalist"></datalist>
+      <br/>
+      <table id="searchHistory"></table>
+    </form>
+  </body>
+</html>

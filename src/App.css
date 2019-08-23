@@ -1,0 +1,79 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  color: #999;
+}
+
+input {
+  margin-left: 40px;
+  padding: 0.5rem;
+  width: 300px;
+  align-content: center;
+  border: 1px solid #999;
+  outline: rgb(71, 71, 71);
+}
+
+table {
+  width: 400px;
+  margin-left: 0px;
+  border-collapse: collapse;
+}
+tr {
+  border: solid;
+  border-width: 1px 0;
+}
+
+tr:first-child {
+  border-top: none;
+}
+tr:last-child {
+  border-bottom: none;
+}
+
+.datetimeCell {
+  font-style: italic;
+  font-size: 12px;
+  text-align: right;
+}
+.headerSearch {
+  text-align: left;
+}
+
+.btn {
+  border: none;
+  background-color: white;
+  color: grey;
+  float: right;
+}
+.material-icons {
+  font-size: 10px;
+  background-color: none;
+  color: grey;
+}
+
+.center {
+  max-width: 500px;
+  margin: auto;
+}
+
+.items {
+  border: 1px solid #999;
+  border-top-width: 0;
+  list-style: none;
+  margin-top: 0;
+  margin-left: 40px;
+  max-height: 143px;
+  overflow-y: auto;
+  padding-left: 0;
+  width: 300px;
+}
+
+.items li {
+  padding: 0.5rem;
+}
+
+.items li:hover {
+  background-color: #747577;
+  color: #faf9f6;
+  cursor: pointer;
+  font-weight: 600;
+}

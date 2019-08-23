@@ -1,0 +1,27 @@
+button {
+  width: 272px;
+  height: 142px;
+  padding: 10px;
+  
+  font-size: 32px;
+  font-weight: 900;
+  font: Helvetica-Black;
+  font-spacing: -2px;
+  
+  line-height: 110px;
+  border: 3px solid gray;
+  outline: 3px solid white;
+  background-image: linear-gradient(to right, rgb(245, 175, 98, 0.95), rgb(239, 149, 68, 1));
+}
+
+i {
+  background-color: white;
+  padding: 28px;
+  border-radius: 85%;
+  float: right;
+}
+
+.material-icons.md-42 { 
+  font-size: 55px; 
+  font-weight: 900; 
+}
